@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="uz" data-theme="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>AgroMed | Professional Oʻsimliklar Dorixonasi</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<style>
+			:root {
+				--primary: #10b981;
+				--primary-dark: #059669;
+				--bg-main: #f9fafb;
+				--bg-card: #ffffff;
+				--text-main: #111827;
+				--text-muted: #4b5563;
+				--border: #e5e7eb;
+				--radius: 12px;
+				--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+				--transition: all 0.3s ease;
+			}
+
+			[data-theme='dark'] {
+				--bg-main: #0f172a;
+				--bg-card: #1e293b;
+				--text-main: #f8fafc;
+				--text-muted: #94a3b8;
+				--border: #334155;
+				--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: 'Segoe UI', system-ui, sans-serif;
+			}
+
+			body {
+				background-color: var(--bg-main);
+				color: var(--text-main);
+				transition: var(--transition);
+				line-height: 1.6;
+			}
+
+			/* Header & Navigation */
+			header {
+				position: sticky;
+				top: 0;
+				z-index: 1000;
+				background: var(--bg-card);
+				border-bottom: 1px solid var(--border);
+				box-shadow: var(--shadow);
+			}
+
+			.nav-container {
+				max-width: 1200px;
+				margin: 0 auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 1rem 2rem;
+			}
+
+			.logo {
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: var(--primary);
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.nav-links {
+				display: flex;
+				gap: 1.5rem;
+				list-style: none;
+				align-items: center;
+			}
+
+			.nav-links a {
+				text-decoration: none;
+				color: var(--text-main);
+				font-weight: 500;
+				transition: var(--transition);
+				cursor: pointer;
+			}
+
+			.nav-links a:hover,
+			.nav-links a.active {
+				color: var(--primary);
+			}
+
+			.nav-actions {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+			}
+
+			.btn {
+				padding: 0.6rem 1.2rem;
+				border-radius: var(--radius);
+				border: none;
+				cursor: pointer;
+				font-weight: 600;
+				transition: var(--transition);
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.btn-primary {
+				background: var(--primary);
+				color: white;
+			}
+			.btn-primary:hover {
+				background: var(--primary-dark);
+			}
+			.btn-outline {
+				background: transparent;
+				border: 1px solid var(--border);
+				color: var(--text-main);
+			}
+			.btn-outline:hover {
+				background: var(--border);
+			}
+			.btn-danger {
+				background: #ef4444;
+				color: white;
+			}
+			.btn-danger:hover {
+				background: #dc2626;
+			}
+
+			.theme-toggle {
+				background: transparent;
+				border: none;
+				font-size: 1.2rem;
+				cursor: pointer;
+				color: var(--text-main);
+			}
+
+			.badge {
+				background: #ef4444;
+				color: white;
+				font-size: 0.75rem;
+				padding: 0.2rem 0.5rem;
+				border-radius: 50%;
+				margin-left: 0.2rem;
+			}
+
+			.hamburger {
+				display: none;
+				flex-direction: column;
+				gap: 5px;
+				cursor: pointer;
+				border: none;
+				background: transparent;
+			}
+
+			.hamburger span {
+				width: 25px;
+				height: 3px;
+				background: var(--text-main);
+				border-radius: 2px;
+				transition: var(--transition);
+			}
+
+			/* SPA Sections Management */
+			.app-section {
+				display: none;
+				padding: 3rem 2rem;
+				max-width: 1200px;
+				margin: 0 auto;
+				min-height: 80vh;
+			}
+
+			.app-section.active-section {
+				display: block;
+			}
+
+			/* Home Layout */
+			.hero {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 2rem;
+				padding: 4rem 0;
+			}
+
+			.hero-content {
+				flex: 1;
+			}
+			.hero-content h1 {
+				font-size: 3rem;
+				line-height: 1.2;
+				margin-bottom: 1rem;
+			}
+			.hero-content p {
+				color: var(--text-muted);
+				font-size: 1.1rem;
+				margin-bottom: 2rem;
+			}
+			.hero-image {
+				flex: 1;
+				display: flex;
+				justify-content: center;
+			}
+			.hero-image img {
+				max-width: 100%;
+				border-radius: var(--radius);
+				box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+			}
+
+			.stats-banner {
+				background: var(--primary);
+				color: white;
+				border-radius: var(--radius);
+				display: flex;
+				justify-content: space-around;
+				flex-wrap: wrap;
+				gap: 2rem;
+				padding: 3rem;
+				text-align: center;
+				margin: 4rem 0;
+			}
+			.stat-item h3 {
+				font-size: 2.5rem;
+				font-weight: 800;
+			}
+
+			.grid-3 {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+
+			.card {
+				background: var(--bg-card);
+				border: 1px solid var(--border);
+				border-radius: var(--radius);
+				padding: 1.5rem;
+				box-shadow: var(--shadow);
+				transition: var(--transition);
+				position: relative;
+			}
+			.card:hover {
+				transform: translateY(-5px);
+			}
+
+			.product-img {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+				border-radius: calc(var(--radius) - 4px);
+				margin-bottom: 1rem;
+			}
+
+			/* Shop Layout */
+			.shop-layout {
+				display: grid;
+				grid-template-columns: 280px 1fr;
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+
+			.sidebar {
+				background: var(--bg-card);
+				border: 1px solid var(--border);
+				border-radius: var(--radius);
+				padding: 1.5rem;
+				height: fit-content;
+			}
+
+			.form-group {
+				margin-bottom: 1.2rem;
+			}
+			.form-group label {
+				display: block;
+				margin-bottom: 0.4rem;
+				font-weight: 500;
+			}
+			.form-control {
+				width: 100%;
+				padding: 0.75rem;
+				border: 1px solid var(--border);
+				border-radius: var(--radius);
+				background: var(--bg-main);
+				color: var(--text-main);
+				outline: none;
+				transition: var(--transition);
+			}
+			.form-control:focus {
+				border-color: var(--primary);
+			}
+
+			/* Chat System */
+			.chat-window {
+				background: var(--bg-card);
+				border: 1px solid var(--border);
+				border-radius: var(--radius);
+				height: 500px;
+				display: flex;
+				flex-direction: column;
+				box-shadow: var(--shadow);
+			}
+			.chat-messages {
+				flex: 1;
+				padding: 1.5rem;
+				overflow-y: auto;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+			.msg-bubble {
+				max-width: 70%;
+				padding: 0.8rem 1.2rem;
+				border-radius: var(--radius);
+				position: relative;
+			}
+			.msg-sent {
+				background: var(--primary);
+				color: white;
+				align-self: flex-end;
+				border-bottom-right-radius: 0;
+			}
+			.msg-received {
+				background: var(--border);
+				color: var(--text-main);
+				align-self: flex-start;
+				border-bottom-left-radius: 0;
+			}
+			.msg-meta {
+				font-size: 0.7rem;
+				display: block;
+				margin-top: 0.3rem;
+				opacity: 0.8;
+			}
+
+			/* Modal Blueprint */
+			.modal {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				display: none;
+				align-items: center;
+				justify-content: center;
+				z-index: 2000;
+				padding: 1rem;
+			}
+			.modal-content {
+				background: var(--bg-card);
+				padding: 2.5rem;
+				border-radius: var(--radius);
+				max-width: 600px;
+				width: 100%;
+				position: relative;
+				box-shadow: var(--shadow);
+			}
+			.close-modal {
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+				font-size: 1.5rem;
+				cursor: pointer;
+				background: transparent;
+				border: none;
+				color: var(--text-main);
+			}
+
+			/* Cart & Admin Tables */
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 1rem;
+				text-align: left;
+			}
+			th,
+			td {
+				padding: 1rem;
+				border-bottom: 1px solid var(--border);
+			}
+			th {
+				background: var(--bg-main);
+			}
+
+			.admin-grid {
+				display: grid;
+				grid-template-columns: 240px 1fr;
+				gap: 2rem;
+			}
+
+			/* Footer */
+			footer {
+				background: var(--bg-card);
+				border-top: 1px solid var(--border);
+				padding: 3rem 2rem;
+				margin-top: 4rem;
+				text-align: center;
+			}
+
+			/* Responsive Configuration */
+			@media (max-width: 992px) {
+				.shop-layout,
+				.admin-grid {
+					grid-template-columns: 1fr;
+				}
+				.hero {
+					flex-direction: column;
+					text-align: center;
+				}
+			}
+
+			@media (max-width: 768px) {
+				.nav-links {
+					display: none;
+					position: absolute;
+					top: 100%;
+					left: 0;
+					width: 100%;
+					background: var(--bg-card);
+					flex-direction: column;
+					padding: 1.5rem;
+					border-bottom: 1px solid var(--border);
+					box-shadow: var(--shadow);
+				}
+				.nav-links.mobile-active {
+					display: flex;
+				}
+				.hamburger {
+					display: flex;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<nav class="nav-container">
+				<a onclick="switchSection('home')" class="logo">🌿 AgroMed</a>
+				<button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+				<ul class="nav-links" id="navLinks">
+					<li><a onclick="switchSection('home')" id="nav-home" class="active">Bosh sahifa</a></li>
+					<li><a onclick="switchSection('products')" id="nav-products">Mahsulotlar</a></li>
+					<li>
+						<a onclick="switchSection('chat')" id="nav-chat">Xabarlar <span class="badge" id="chatBadge">0</span></a>
+					</li>
+					<li>
+						<a onclick="switchSection('cart')" id="nav-cart">Savatcha <span class="badge" id="cartBadge">0</span></a>
+					</li>
+					<li><a onclick="switchSection('admin')" id="nav-admin" style="display: none">Admin Panel</a></li>
+				</ul>
+				<div class="nav-actions">
+					<button class="theme-toggle" id="themeBtn">🌙</button>
+					<div id="authContainer">
+						<button class="btn btn-outline" onclick="switchSection('login')">Kirish</button>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<section id="home" class="app-section active-section">
+			<div class="hero">
+				<div class="hero-content" data-aos="fade-right">
+					<h1>Hosilingizni Ilmiy Asosda Himoya Qiling</h1>
+					<p>
+						Sertifikatlangan organik biopreparatlar, tez ta'sir qiluvchi kimyoviy himoya vositalari va yuqori unumdor oʻgʻitlar
+						kolleksiyasi.
+					</p>
+					<button class="btn btn-primary" onclick="switchSection('products')">Katalogni koʻrish</button>
+				</div>
+				<div class="hero-image" data-aos="fade-left">
+					<img
+						src="https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=600&q=80"
+						alt="Agro Himoya" />
+				</div>
+			</div>
+
+			<div class="stats-banner" data-aos="zoom-in">
+				<div class="stat-item">
+					<h3 class="counter" data-target="45000">0</h3>
+					<p>Gektar Himoya Qilindi</p>
+				</div>
+				<div class="stat-item">
+					<h3 class="counter" data-target="1000">0</h3>
+					<p>Mavjud Dorilar Turi</p>
+				</div>
+				<div class="stat-item">
+					<h3 class="counter" data-target="12500">0</h3>
+					<p>Doimiy Mijozlar</p>
+				</div>
+			</div>
+
+			<h2 style="text-align: center; margin-bottom: 2rem">Sara Mahsulotlarimiz</h2>
+			<div class="grid-3" id="featuredGrid"></div>
+
+			<div style="margin-top: 5rem" data-aos="fade-up">
+				<h2 style="text-align: center; margin-bottom: 2rem">Tez-tez beriladigan savollar (FAQ)</h2>
+				<div class="card" style="margin-bottom: 1rem">
+					<h4>Dorilar eksportbop mevalarga zarar yetkazmaydimi?</h4>
+					<p style="color: var(--text-muted); margin-top: 0.5rem">
+						Barcha biopreparatlarimiz xalqaro standartlarga mos keladi va meva tarkibida zararli qoldiqlar qoldirmaydi.
+					</p>
+				</div>
+				<div class="card">
+					<h4>Yetkazib berish xizmati mavjudmi?</h4>
+					<p style="color: var(--text-muted); margin-top: 0.5rem">
+						Ha, Oʻzbekiston boʻylab 24 soat ichida viloyat markazlariga yetkazib beramiz.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="products" class="app-section">
+			<h2>Dori Vositalari Katalogi</h2>
+			<div class="shop-layout">
+				<aside class="sidebar" data-aos="fade-right">
+					<div class="form-group">
+						<label>Qidiruv</label>
+						<input type="text" id="searchBar" class="form-control" placeholder="Nom boʻyicha qidiruv..." />
+					</div>
+					<div class="form-group">
+						<label>Kategoriya</label>
+						<select id="categoryFilter" class="form-control">
+							<option value="all">Barchasi</option>
+							<option value="Fungicide">Fungitsidlar</option>
+							<option value="Insecticide">Insektitsidlar</option>
+							<option value="Herbicide">Gerbitsidlar</option>
+							<option value="Fertilizer">Oʻgʻitlar</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Saralash</label>
+						<select id="sortFilter" class="form-control">
+							<option value="default">Standart</option>
+							<option value="low-high">Narx: Arzonidan qimmatiga</option>
+							<option value="high-low">Narx: Qimmatidan arzoniga</option>
+						</select>
+					</div>
+				</aside>
+				<main>
+					<div class="grid-3" id="productsGrid" data-aos="fade-up"></div>
+				</main>
+			</div>
+		</section>
+
+		<section id="cart" class="app-section">
+			<h2>Sizning Savatchangiz</h2>
+			<div class="card" style="margin-top: 2rem">
+				<div id="cartTableContainer" style="overflow-x: auto"></div>
+				<div style="margin-top: 2rem; text-align: right">
+					<h3>Umumiy summa: $<span id="cartTotalSum">0.00</span></h3>
+					<button class="btn btn-primary" onclick="processCheckout()" style="margin-top: 1rem">
+						Buyurtmani rasmiylashtirish (Telegram)
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<section id="chat" class="app-section">
+			<h2>Agronom Maslahat Markazi</h2>
+			<p style="color: var(--text-muted); margin-bottom: 1.5rem">
+				Oʻsimlik kasalliklari belgilarini yozing, mutaxassislarimiz yordam beradi.
+			</p>
+			<div class="chat-window">
+				<div class="chat-messages" id="chatContainer"></div>
+				<form id="chatForm" style="display: flex; padding: 1rem; gap: 1rem; border-top: 1px solid var(--border)">
+					<input type="text" id="chatName" class="form-control" placeholder="Ismingiz" required style="max-width: 150px" />
+					<input type="text" id="chatInput" class="form-control" placeholder="Xabarni yozing..." required autocomplete="off" />
+					<button type="submit" class="btn btn-primary">Yuborish</button>
+				</form>
+			</div>
+		</section>
+
+		<section id="login" class="app-section">
+			<div style="max-width: 400px; margin: 4rem auto" class="card">
+				<h3 style="text-align: center; margin-bottom: 1.5rem">Tizimga Kirish</h3>
+				<form id="loginForm">
+					<div class="form-group">
+						<label>Telefon raqam</label>
+						<input type="tel" id="loginPhone" class="form-control" required placeholder="+998901234567" />
+					</div>
+					<div class="form-group">
+						<label>Parol (Admin uchun: admin)</label>
+						<input type="password" id="loginPassword" class="form-control" required />
+					</div>
+					<button type="submit" class="btn btn-primary" style="width: 100%">Kirish</button>
+				</form>
+				<p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem">
+					Profilingiz yoʻqmi?
+					<a onclick="switchSection('signup')" style="color: var(--primary); cursor: pointer">Roʻyxatdan oʻtish</a>
+				</p>
+			</div>
+		</section>
+
+		<section id="signup" class="app-section">
+			<div style="max-width: 400px; margin: 4rem auto" class="card">
+				<h3 style="text-align: center; margin-bottom: 1.5rem">Roʻyxatdan oʻtish</h3>
+				<form id="signupForm">
+					<div class="form-group">
+						<label>Toʻliq ism-sharifingiz</label>
+						<input type="text" id="regName" class="form-control" required placeholder="Ali Valiyev" />
+					</div>
+					<div class="form-group">
+						<label>Telefon raqam</label>
+						<input type="tel" id="regPhone" class="form-control" required placeholder="+998901234567" />
+					</div>
+					<div class="form-group">
+						<label>Parol yarating</label>
+						<input type="password" id="regPassword" class="form-control" required minlength="4" />
+					</div>
+					<button type="submit" class="btn btn-primary" style="width: 100%">Roʻyxatdan oʻtish</button>
+				</form>
+			</div>
+		</section>
+
+		<section id="admin" class="app-section">
+			<div class="admin-grid">
+				<aside class="sidebar">
+					<h3>Boshqaruv</h3>
+					<p style="margin-top: 1rem; font-weight: bold; color: var(--primary)">Role: Executive Admin</p>
+					<button
+						class="btn btn-outline"
+						style="width: 100%; margin-top: 1rem"
+						onclick="
+							localStorage.clear();
+							location.reload();
+						">
+						Tizimni tozalash
+					</button>
+				</aside>
+				<main>
+					<h2>Platforma statistikasi</h2>
+					<div class="grid-3" style="margin-bottom: 3rem">
+						<div class="card">
+							<h4>Jami Mahsulotlar</h4>
+							<p style="font-size: 2rem; font-weight: 700; color: var(--primary)">1000 ta</p>
+						</div>
+						<div class="card">
+							<h4>Kelib tushgan xabarlar</h4>
+							<p style="font-size: 2rem; font-weight: 700; color: var(--primary)" id="adminMsgCount">0</p>
+						</div>
+						<div class="card">
+							<h4>Sotuvlar trafigi</h4>
+							<p style="font-size: 2rem; font-weight: 700; color: var(--primary)">100% Onlayn</p>
+						</div>
+					</div>
+					<div class="card">
+						<h3>Haftalik daromad tahlili</h3>
+						<canvas id="revenueChart" style="max-height: 300px; margin-top: 1rem"></canvas>
+					</div>
+				</main>
+			</div>
+		</section>
+
+		<div class="modal" id="productModal">
+			<div class="modal-content">
+				<button class="close-modal" onclick="closeModal()">&times;</button>
+				<div id="modalBody"></div>
+			</div>
+		</div>
+
+		<footer>
+			<p>&copy; 2026 AgroMed Technologies Corporation. Barcha huquqlar himoyalangan.</p>
+		</footer>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+		<script>
+			// --- TELEGRAM LOGISTIKA PARAMETRLARI ---
+			const TELEGRAM_BOT_TOKEN = '8959936014:AAHWeDQQtAkTGJNS3RkvADA3He5JY8Uen0A'; // O'zingizning tokeningizni qo'ying
+			const TELEGRAM_CHAT_ID = '7909323064'; // O'zingizning chat ID'ingizni qo'ying
+
+			// --- 1000 TA MAHSULOT BAZASINI GENERATSIYA QILISH ---
+			const categories = ['Fungicide', 'Insecticide', 'Herbicide', 'Fertilizer'];
+			const categoryUz = { Fungicide: 'Fungitsid', Insecticide: 'Insektitsid', Herbicide: 'Gerbitsid', Fertilizer: 'Oʻgʻit' };
+			const images = [
+				'https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=400&q=80',
+				'https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=400&q=80',
+				'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=400&q=80',
+			];
+
+			const GENERATED_PRODUCTS = [];
+			for (let i = 1; i <= 1000; i++) {
+				const cat = categories[i % categories.length];
+				GENERATED_PRODUCTS.push({
+					id: `prod_${i}`,
+					name: `${categoryUz[cat]} Himoya Kompleksi v${200 + i}`,
+					category: cat,
+					price: parseFloat((10 + ((i * 0.45) % 120)).toFixed(2)),
+					desc: `Professional darajadagi yuqori samarali agro-kimyoviy vosita. Tuproq unumdorligini oshirish va kasalliklarga qarshi kurashish uchun maxsus partiya #${7000 + i}.`,
+					img: images[i % images.length],
+				});
+			}
+
+			// --- DASTUR HOLATI (STATE) ---
+			let state = {
+				products: GENERATED_PRODUCTS,
+				cart: JSON.parse(localStorage.getItem('agro_cart')) || [],
+				messages: JSON.parse(localStorage.getItem('agro_messages')) || [],
+				session: JSON.parse(localStorage.getItem('agro_session')) || null,
+				users: JSON.parse(localStorage.getItem('agro_users')) || [
+					{ name: 'Lead Admin', phone: '+998901111111', password: 'admin', role: 'ADMIN' },
+				],
+			};
+
+			// --- CORE FUNCTIONS ---
+			function saveState() {
+				localStorage.setItem('agro_cart', JSON.stringify(state.cart));
+				localStorage.setItem('agro_messages', JSON.stringify(state.messages));
+				localStorage.setItem('agro_session', JSON.stringify(state.session));
+				localStorage.setItem('agro_users', JSON.stringify(state.users));
+			}
+
+			async function sendTelegramAlert(text) {
+				try {
+					await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: text, parse_mode: 'HTML' }),
+					});
+				} catch (err) {
+					console.error('Telegram uzatish tizimi xatosi:', err);
+				}
+			}
+
+			// --- NAVIGATION ENGINE (SPA) ---
+			function switchSection(sectionId) {
+				document.querySelectorAll('.app-section').forEach(s => s.classList.remove('active-section'));
+				document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+
+				const targetSection = document.getElementById(sectionId);
+				if (targetSection) targetSection.classList.add('active-section');
+
+				const targetNav = document.getElementById(`nav-${sectionId}`);
+				if (targetNav) targetNav.classList.add('active');
+
+				window.scrollTo(0, 0);
+				document.getElementById('navLinks').classList.remove('mobile-active');
+
+				// Dinamik render chaqiruvlari
+				if (sectionId === 'home') renderIndexProducts();
+				if (sectionId === 'products') renderCatalog();
+				if (sectionId === 'cart') renderCart();
+				if (sectionId === 'chat') {
+					renderChat();
+					markMessagesAsRead();
+				}
+				if (sectionId === 'admin') initAdminCharts();
+			}
+
+			// --- THEME ENGINE ---
+			const themeBtn = document.getElementById('themeBtn');
+			const currentTheme = localStorage.getItem('agro_theme') || 'light';
+			document.documentElement.setAttribute('data-theme', currentTheme);
+			themeBtn.innerText = currentTheme === 'dark' ? '☀️' : '🌙';
+
+			themeBtn.addEventListener('click', () => {
+				const current = document.documentElement.getAttribute('data-theme');
+				const target = current === 'light' ? 'dark' : 'light';
+				document.documentElement.setAttribute('data-theme', target);
+				localStorage.setItem('agro_theme', target);
+				themeBtn.innerText = target === 'dark' ? '☀️' : '🌙';
+			});
+
+			// --- MOBILE MENU ---
+			document.getElementById('hamburgerBtn').addEventListener('click', () => {
+				document.getElementById('navLinks').classList.toggle('mobile-active');
+			});
+
+			// --- INTERACTION & RENDERING ENGINE ---
+			document.addEventListener('DOMContentLoaded', () => {
+				AOS.init({ duration: 800, once: true });
+				startCounters();
+				renderIndexProducts();
+				updateBadges();
+				syncAuthUI();
+
+				// Qidiruv va Filtrlar hodisalari
+				document.getElementById('searchBar').addEventListener('input', renderCatalog);
+				document.getElementById('categoryFilter').addEventListener('change', renderCatalog);
+				document.getElementById('sortFilter').addEventListener('change', renderCatalog);
+			});
+
+			function startCounters() {
+				document.querySelectorAll('.counter').forEach(c => {
+					const target = +c.getAttribute('data-target');
+					const speed = target / 60;
+					const update = () => {
+						const count = +c.innerText;
+						if (count < target) {
+							c.innerText = Math.ceil(count + speed);
+							setTimeout(update, 20);
+						} else {
+							c.innerText = target + '+';
+						}
+					};
+					update();
+				});
+			}
+
+			function updateBadges() {
+				document.getElementById('cartBadge').innerText = state.cart.reduce((acc, item) => acc + item.qty, 0);
+				const unread = state.messages.filter(m => !m.read && m.sender !== 'ADMIN').length;
+				document.getElementById('chatBadge').innerText = unread;
+				document.getElementById('adminMsgCount').innerText = state.messages.length;
+			}
+
+			function syncAuthUI() {
+				const container = document.getElementById('authContainer');
+				const adminNav = document.getElementById('nav-admin');
+				if (state.session) {
+					container.innerHTML = `<span style='color:var(--primary); font-weight:600;'>👤 ${state.session.name}</span> <button class='btn btn-outline' onclick='accountLogout()' style='margin-left:1rem;'>Chiqish</button>`;
+					if (state.session.role === 'ADMIN') adminNav.style.display = 'inline-block';
+				} else {
+					container.innerHTML = `<button class="btn btn-outline" onclick="switchSection('login')">Kirish</button>`;
+					adminNav.style.display = 'none';
+				}
+			}
+
+			function renderIndexProducts() {
+				const grid = document.getElementById('featuredGrid');
+				grid.innerHTML = state.products
+					.slice(0, 3)
+					.map(
+						p => `
+                <div class="card" data-aos="fade-up">
+                    <img src="${p.img}" class="product-img" alt="${p.name}">
+                    <h3 style="font-size:1.2rem;">${p.name}</h3>
+                    <p style="color:var(--primary); font-weight:700; margin-top:0.5rem; font-size:1.3rem;">$${p.price}</p>
+                    <button class="btn btn-primary" onclick="viewProduct('${p.id}')" style="width:100%; margin-top:1rem; justify-content:center;">Batafsil</button>
+                </div>
+            `,
+					)
+					.join('');
+			}
+
+			function renderCatalog() {
+				const grid = document.getElementById('productsGrid');
+				const search = document.getElementById('searchBar').value.toLowerCase();
+				const cat = document.getElementById('categoryFilter').value;
+				const sort = document.getElementById('sortFilter').value;
+
+				let items = state.products.filter(p => (cat === 'all' || p.category === cat) && p.name.toLowerCase().includes(search));
+
+				if (sort === 'low-high') items.sort((a, b) => a.price - b.price);
+				if (sort === 'high-low') items.sort((a, b) => b.price - a.price);
+
+				// Lazy Render: 1000 tasidan dastlabki 48 tasini ko'rsatamiz brauzer qotmasligi uchun
+				grid.innerHTML = items
+					.slice(0, 48)
+					.map(
+						p => `
+                <div class="card">
+                    <img src="${p.img}" class="product-img" alt="${p.name}">
+                    <h4 style="height:45px; overflow:hidden;">${p.name}</h4>
+                    <p style="color:var(--text-muted); font-size:0.85rem; margin:0.5rem 0;">${categoryUz[p.category]}</p>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+                        <span style="font-weight:700; font-size:1.2rem; color:var(--primary);">$${p.price}</span>
+                        <div style="display:flex; gap:0.5rem;">
+                            <button class="btn btn-outline" onclick="viewProduct('${p.id}')">👁️</button>
+                            <button class="btn btn-primary" onclick="addToCart('${p.id}')">Qoʻshish</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+					)
+					.join('');
+			}
+
+			// --- MODAL ENGINE ---
+			function viewProduct(id) {
+				const p = state.products.find(x => x.id === id);
+				if (!p) return;
+				document.getElementById('modalBody').innerHTML = `
+                <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                    <img src="${p.img}" style="width:100%; height:250px; object-fit:cover; border-radius:var(--radius);" alt="${p.name}">
+                    <h2>${p.name}</h2>
+                    <p style="font-size:1.1rem; color:var(--text-muted);">${p.desc}</p>
+                    <h3 style="color:var(--primary); font-size:1.8rem;">$${p.price}</h3>
+                    <button class="btn btn-primary" onclick="addToCart('${p.id}'); closeModal();" style="justify-content:center; padding:1rem;">Savatchaga qoʻshish</button>
+                </div>
+            `;
+				document.getElementById('productModal').style.display = 'flex';
+			}
+			function closeModal() {
+				document.getElementById('productModal').style.display = 'none';
+			}
+
+			// --- CART ENGINE ---
+			function addToCart(id) {
+				const exist = state.cart.find(c => c.id === id);
+				if (exist) {
+					exist.qty += 1;
+				} else {
+					state.cart.push({ id: id, qty: 1 });
+				}
+				saveState();
+				updateBadges();
+				alert('Mahsulot savatchaga qoʻshildi!');
+			}
+
+			function mutateCartQty(id, delta) {
+				const item = state.cart.find(c => c.id === id);
+				if (item) {
+					item.qty += delta;
+					if (item.qty <= 0) state.cart = state.cart.filter(c => c.id !== id);
+					saveState();
+					updateBadges();
+					renderCart();
+				}
+			}
+
+			function renderCart() {
+				const container = document.getElementById('cartTableContainer');
+				const sumNode = document.getElementById('cartTotalSum');
+				if (state.cart.length === 0) {
+					container.innerHTML = `<p style="padding:2rem; text-align:center; color:var(--text-muted);">Savatchangiz hozircha boʻsh.</p>`;
+					sumNode.innerText = '0.00';
+					return;
+				}
+				let grandTotal = 0;
+				let html = `<table><thead><tr><th>Mahsulot</th><th>Narx</th><th>Soni</th><th>Jami</th><th>Oʻchirish</th></tr></thead><tbody>`;
+				state.cart.forEach(c => {
+					const p = state.products.find(x => x.id === c.id);
+					if (p) {
+						const lineTotal = p.price * c.qty;
+						grandTotal += lineTotal;
+						html += `
+                        <tr>
+                            <td><strong>${p.name}</strong></td>
+                            <td>$${p.price}</td>
+                            <td>
+                                <button class="btn btn-outline" style="padding:0.2rem 0.6rem;" onclick="mutateCartQty('${c.id}', -1)">-</button>
+                                <span style="margin:0 0.5rem; font-weight:bold;">${c.qty}</span>
+                                <button class="btn btn-outline" style="padding:0.2rem 0.6rem;" onclick="mutateCartQty('${c.id}', 1)">+</button>
+                            </td>
+                            <td>$${lineTotal.toFixed(2)}</td>
+                            <td><button class="btn btn-danger" style="padding:0.4rem 0.8rem;" onclick="mutateCartQty('${c.id}', -${c.qty})">X</button></td>
+                        </tr>
+                    `;
+					}
+				});
+				html += `</tbody></table>`;
+				container.innerHTML = html;
+				sumNode.innerText = grandTotal.toFixed(2);
+			}
+
+			async function processCheckout() {
+				if (state.cart.length === 0) return alert('Savatcha boʻsh!');
+				if (!state.session) {
+					alert('Buyurtma berish uchun tizimga kiring!');
+					return switchSection('login');
+				}
+
+				let report = `🛒 <b>Yangi Buyurtma Keldi!</b>\n\n👤 Mijoz: ${state.session.name}\n📞 Tel: ${state.session.phone}\n\n📦 <b>Mahsulotlar:</b>\n`;
+				let total = 0;
+				state.cart.forEach(c => {
+					const p = state.products.find(x => x.id === c.id);
+					if (p) {
+						report += `- ${p.name} (${c.qty} ta) - $${(p.price * c.qty).toFixed(2)}\n`;
+						total += p.price * c.qty;
+					}
+				});
+				report += `\n💵 <b>Umumiy summa: $${total.toFixed(2)}</b>`;
+
+				await sendTelegramAlert(report);
+				alert('Sizning buyurtmangiz qabul qilindi va Telegram operatoriga yoʻnaltirildi!');
+				state.cart = [];
+				saveState();
+				updateBadges();
+				renderCart();
+			}
+
+			// --- CHAT MASLAHAT ENGINE ---
+			function renderChat() {
+				const box = document.getElementById('chatContainer');
+				box.innerHTML = state.messages
+					.map(
+						m => `
+                <div class="msg-bubble ${m.sender === 'ADMIN' ? 'msg-received' : 'msg-sent'}">
+                    <strong>${m.name}:</strong><p style="margin-top:0.2rem;">${m.text}</p>
+                    <span class="msg-meta">${m.time}</span>
+                </div>
+            `,
+					)
+					.join('');
+				box.scrollTop = box.scrollHeight;
+			}
+
+			function markMessagesAsRead() {
+				state.messages.forEach(m => {
+					if (m.sender !== 'ADMIN') m.read = true;
+				});
+				saveState();
+				updateBadges();
+			}
+
+			document.getElementById('chatForm').addEventListener('submit', async e => {
+				e.preventDefault();
+				const nameNode = document.getElementById('chatName');
+				const inputNode = document.getElementById('chatInput');
+				const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+				const msgObj = {
+					sender: state.session ? state.session.role : 'USER',
+					name: nameNode.value.trim(),
+					text: inputNode.value.trim(),
+					time: timeString,
+					read: false,
+				};
+
+				state.messages.push(msgObj);
+				saveState();
+				renderChat();
+				updateBadges();
+
+				// Telegram orqali real-vaqtda ogohlantirish yuborish
+				await sendTelegramAlert(
+					`💬 <b>Agronom Maslahat Chatidan Xabar:</b>\n\n👤 Kimdan: ${msgObj.name}\n✉️ Xabar: ${msgObj.text}`,
+				);
+				inputNode.value = '';
+			});
+
+			// --- AUTH GATEWAY ---
+			document.getElementById('loginForm').addEventListener('submit', e => {
+				e.preventDefault();
+				const p = document.getElementById('loginPhone').value.trim();
+				const pass = document.getElementById('loginPassword').value.trim();
+				const match = state.users.find(u => u.phone === p && u.password === pass);
+
+				if (match) {
+					state.session = match;
+					saveState();
+					syncAuthUI();
+					alert(`Xush kelibsiz, ${match.name}!`);
+					switchSection(match.role === 'ADMIN' ? 'admin' : 'home');
+				} else {
+					alert('Telefon yoki parol xato!');
+				}
+			});
+
+			document.getElementById('signupForm').addEventListener('submit', e => {
+				e.preventDefault();
+				const name = document.getElementById('regName').value.trim();
+				const phone = document.getElementById('regPhone').value.trim();
+				const password = document.getElementById('regPassword').value.trim();
+
+				if (state.users.some(u => u.phone === phone)) return alert('Bu telefon raqam roʻyxatdan oʻtgan!');
+
+				const newUser = { name, phone, password, role: 'USER' };
+				state.users.push(newUser);
+				state.session = newUser;
+				saveState();
+				syncAuthUI();
+				alert('Profil muvaffaqiyatli yaratildi!');
+				switchSection('home');
+			});
+
+			function accountLogout() {
+				state.session = null;
+				saveState();
+				syncAuthUI();
+				switchSection('home');
+			}
+
+			// --- ADMIN ANALYTICS ENGINE ---
+			function initAdminCharts() {
+				const ctx = document.getElementById('revenueChart');
+				if (!ctx) return;
+				// Oldingi grafik obyektini tozalash
+				if (window.agroAdminChart) window.agroAdminChart.destroy();
+
+				window.agroAdminChart = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba', 'Yakshanba'],
+						datasets: [
+							{
+								label: 'Haftalik Savdo ($)',
+								data: [1200, 1900, 3200, 2500, 4100, 5600, 6800],
+								borderColor: '#10b981',
+								backgroundColor: 'rgba(16, 185, 129, 0.1)',
+								fill: true,
+								tension: 0.4,
+							},
+						],
+					},
+					options: { responsive: true, maintainAspectRatio: false },
+				});
+			}
+		</script>
+	</body>
+</html>
